@@ -2,6 +2,8 @@ package br.unesp.rc.modelo;
 
 public abstract class Sensor implements ISensor {
 
+    //Classe pai para os sensores do sistema, armazenando implementações comuns
+
     protected String id;
     protected double valor;
     protected ETipo tipo;

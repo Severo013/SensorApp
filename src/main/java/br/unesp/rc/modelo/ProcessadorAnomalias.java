@@ -4,6 +4,8 @@ import java.util.List;
 
 public class ProcessadorAnomalias implements IProcessadorDados{
 
+    //Classe para processamento de anomalias nos valores de sensor
+
     @Override
     public void processarDados(List<ISensor> sensores) {
         for (ISensor sensor : sensores) {
