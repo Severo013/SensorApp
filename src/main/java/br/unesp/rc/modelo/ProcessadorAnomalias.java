@@ -9,11 +9,9 @@ public class ProcessadorAnomalias implements IProcessadorDados{
     @Override
     public void processarDados(List<ISensor> sensores) {
         for (ISensor sensor : sensores) {
-            if (sensor.obterTipo().equals("Sensor de Qualidade do Ar")) {
-                if (sensor.obterValor() > 0.5) { // Valor de referência para detecção de anomalia
+            if (sensor.obterTipo().equals("Sensor de Qualidade do Ar"))
+                //if (sensor.obterValor() > 0.5) // Valor de referência para detecção de anomalia
                     System.out.println("Anomalia detectada no sensor " + sensor.obterId());
-                }
-            }
         }
     }
 }
