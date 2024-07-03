@@ -39,7 +39,7 @@ public class GeradorPDF implements IGeradorPDF{
     
   
     @Override
-    public void gerarPDF(List<Sensor> listaSensor, String filePath) {
+    public void gerarPDF(List<Sensor> listaSensor) {
         try {
             Paragraph pulaLinha= new Paragraph(" ").setFontSize(tamanhoTexto);
             ProcessadorSensores processador = new ProcessadorSensores();
@@ -70,6 +70,16 @@ public class GeradorPDF implements IGeradorPDF{
             
             document.add(pulaLinha);
             document.add(ls);
+            titulo= new Paragraph("Análise de anomalias nos sensores de água");
+            titulo.setTextAlignment(TextAlignment.CENTER).setFont(negrito).setFontSize(tamanhoTitulo);
+            document.add(titulo);
+            document.add(ls);
+            
+            document.add(new Paragraph(procAnom.processarDados(listaSensor, ETipo.QUALIDADE_AGUA)).setFont(fonte).setFontSize(tamanhoTexto));
+            
+            document.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
+            
+            document.add(ls);
             titulo=new Paragraph("Sensores de Qualidade de Ar");
             titulo.setTextAlignment(TextAlignment.CENTER).setFont(negrito).setFontSize(tamanhoTitulo);
             document.add(titulo);
@@ -86,15 +96,6 @@ public class GeradorPDF implements IGeradorPDF{
             
             document.add(new Paragraph(processador.processarDados(listaSensor, ETipo.QUALIDADE_AR)).setFont(fonte).setFontSize(tamanhoTexto));
             
-            document.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
-            
-            document.add(ls);
-            titulo= new Paragraph("Análise de anomalias nos sensores de água");
-            titulo.setTextAlignment(TextAlignment.CENTER).setFont(negrito).setFontSize(tamanhoTitulo);
-            document.add(titulo);
-            document.add(ls);
-            
-            document.add(new Paragraph(procAnom.processarDados(listaSensor, ETipo.QUALIDADE_AGUA)).setFont(fonte).setFontSize(tamanhoTexto));
             document.add(pulaLinha);
             
             document.add(ls);
