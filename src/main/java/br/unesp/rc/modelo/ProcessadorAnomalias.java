@@ -7,29 +7,25 @@ public class ProcessadorAnomalias implements IProcessadorDados {
     //preciso corrigir
     //Classe para processamento de anomalias nos valores de sensor
     @Override
-    public void processarDados(List<Sensor> sensores, ETipo tipo) {
-        System.out.println("\n============================================\n");
-        if (tipo == ETipo.QUALIDADE_AGUA) {
-            System.out.println("Analisando anomalias nos sensores de água.");
-        } else if (tipo == ETipo.QUALIDADE_AR) {
-            System.out.println("Analisando anomalias nos sensores de ar.");
-        }
-        System.out.println("\n============================================\n");
+    public String processarDados(List<Sensor> sensores, ETipo tipo) {
+        StringBuilder retorno = new StringBuilder();
+        
+        int contador = 0;
         for (ISensor sensor : sensores) {
             int flag = 0;
-            StringBuilder retorno = new StringBuilder();
-            
             if (sensor.obterTipo() == tipo) {
+                contador++;
                 //0-pH, 1-Turbidez, 2-Condutividade
                 //0-CO2, 1-PM2.5, 2-O3
                 double min = (tipo == ETipo.QUALIDADE_AGUA ? EParametroAnomalia.PH.getMin() : EParametroAnomalia.CO2.getMin()),
                         max = (tipo == ETipo.QUALIDADE_AGUA ? EParametroAnomalia.PH.getMax() : EParametroAnomalia.CO2.getMax());
+                
                 if (sensor.obterValores().get(0) < min || sensor.obterValores().get(0) > max) {
                     flag = 1;
-                    retorno.append("\nAnomalia detectada no sensor de id: " + sensor.obterId() + "\n\t");
+                    retorno.append("\nAnomalia detectada no sensor de id: ").append(sensor.obterId()).append("\n\t");
                     retorno.append(tipo == ETipo.QUALIDADE_AGUA ? "pH " : "Concetração de CO2 (ppm) ");
                     retorno.append((sensor.obterValores().get(0) > max) ? "acima" : "abaixo");
-                    retorno.append(" do valor ideal, entre " + min + " e " + max + ". Valor: ");
+                    retorno.append(" do valor ideal, entre ").append(min).append(" e ").append(max).append(". Valor: ");
                     retorno.append(String.format("%.2f", sensor.obterValores().get(0)));
                     if (ETipo.QUALIDADE_AR == tipo) {
                         retorno.append(" ppm.");
@@ -41,7 +37,7 @@ public class ProcessadorAnomalias implements IProcessadorDados {
 
                 if (sensor.obterValores().get(1) > min) {
                     if (flag == 0) {
-                        retorno.append("\nAnomalia detectada no sensor de id: " + sensor.obterId());
+                        retorno.append("\nAnomalia detectada no sensor de id: ").append(sensor.obterId());
                     }
                     retorno.append("\n\t");
                     flag = 1;
@@ -49,10 +45,10 @@ public class ProcessadorAnomalias implements IProcessadorDados {
                     retorno.append(" acima do valor ideal (");
                     retorno.append(tipo == ETipo.QUALIDADE_AGUA ? "até 1 NTU" : "até 12 µg/m³");
 
-                    retorno.append("). Valor: " + String.format("%.2f", sensor.obterValores().get(1)));
+                    retorno.append("). Valor: ").append(String.format("%.2f", sensor.obterValores().get(1)));
                     retorno.append(tipo == ETipo.QUALIDADE_AGUA ? " NTU." : " µg/m³ ");
                     if (tipo == ETipo.QUALIDADE_AR) {
-                        retorno.append(" - poluição " + (sensor.obterValores().get(1) < max ? "moderada." : "severa."));
+                        retorno.append(" - poluição ").append(sensor.obterValores().get(1) < max ? "moderada." : "severa.");
                     }
 
                 }
@@ -63,7 +59,7 @@ public class ProcessadorAnomalias implements IProcessadorDados {
                 if ((tipo == ETipo.QUALIDADE_AGUA ? sensor.obterValores().get(2) < min : false)
                         || sensor.obterValores().get(2) > max) {
                     if (flag == 0) {
-                        retorno.append("\nAnomalia detectada no sensor de id: " + sensor.obterId());
+                        retorno.append("\nAnomalia detectada no sensor de id: ").append(sensor.obterId());
                     }
                     retorno.append("\n\t");
                     flag = 1;
@@ -75,15 +71,21 @@ public class ProcessadorAnomalias implements IProcessadorDados {
                     }
                     retorno.append(" do valor ideal (");
                     if (tipo == ETipo.QUALIDADE_AGUA) {
-                        retorno.append("entre " + min + " e " + max + " µS/cm³");
+                        retorno.append("entre ").append(min).append(" e ").append(max).append(" µS/cm³");
                     } else if (tipo == ETipo.QUALIDADE_AR) {
-                        retorno.append("até " + max + " ppb");
+                        retorno.append("até ").append(max).append(" ppb");
                     }
-                    retorno.append("). Valor: " + String.format("%.2f", sensor.obterValores().get(2)));
+                    retorno.append("). Valor: ").append(String.format("%.2f", sensor.obterValores().get(2)));
                     retorno.append(tipo == ETipo.QUALIDADE_AGUA ? " µS/cm." : " ppb.");
                 }
-                System.out.println(flag==0 ? "\nNenhuma anomalia detectada no sensor de id: " + sensor.obterId() : retorno);
+                if (flag == 0) {
+                    retorno.append("\nNenhuma anomalia detectada no sensor de id: ").append(sensor.obterId());
+                } else {
+                    retorno.append('\n');
+                }
             }
         }
+        return (contador == 0) ? "\nNão existem sensores deste tipo cadastrado." : retorno.toString();
+        
     }
 }

@@ -26,7 +26,7 @@ public class GerarValoresAleatorios {
     // Gerar valor aleatório de Turbidez entre 0 e 5 NTU
     //o padrao de agua potavel é abaixo de 1 NTU
     public static double gerarTurbidez() {
-        return ((5 - 0) * random.nextDouble() + (1 - 0) * random.nextDouble()) / 2;
+        return ((5 - 0) * random.nextDouble() + (0.5) * random.nextDouble()) / 2;
     }
 
     // Gerar valor aleatório de Condutividade entre 50 e 2250 µS/cm
