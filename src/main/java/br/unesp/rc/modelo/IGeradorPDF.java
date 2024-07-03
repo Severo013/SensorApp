@@ -12,5 +12,5 @@ import java.util.List;
  * @author ottoj
  */
 public interface IGeradorPDF {
-    void gerarPDF(List<Sensor> listaSensor, String filePath);
+    void gerarPDF(List<Sensor> listaSensor);
 }

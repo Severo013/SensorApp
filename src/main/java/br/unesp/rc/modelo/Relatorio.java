@@ -19,7 +19,7 @@ public class Relatorio {
         this.geradorPDF = new GeradorPDF();
     }
 
-    public void criarRelatorio(List<Sensor> listaSensor, String filePath) {
-        geradorPDF.gerarPDF(listaSensor, filePath);
+    public void criarRelatorio(List<Sensor> listaSensor) {
+        geradorPDF.gerarPDF(listaSensor);
     }
 }
