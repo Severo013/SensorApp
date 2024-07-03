@@ -41,7 +41,8 @@ public class SensorQualidadeAr extends Sensor {
 
     @Override
     public String toString() {
-        return "\n\tCO2: " + String.format("%.2f", indicadorCO2) 
+        return  "Sensor - id: " + id +
+                "\n\tCO2: " + String.format("%.2f", indicadorCO2) 
                 + " ppm\n\tPM2.5: " + String.format("%.2f",indicadorPM) 
                 + " µg/m³\n\tO3: " + String.format("%.2f",indicadorO3) + " ppb\n";
     }

@@ -41,7 +41,8 @@ public class SensorQualidadeAgua extends Sensor {
 
     @Override
     public String toString() {
-        return "\n\tPH: " + String.format("%.2f",indicadorPH)
+        return  "Sensor - id: " + id +
+                "\n\tPH: " + String.format("%.2f",indicadorPH)
                 + "\n\tTurbidez: " + String.format("%.2f",indicadorTurbidez)
                 + " NTU\n\tCondutividade: " + String.format("%.2f",indicadorCondutividade) + " µS/cm\n";
     }
