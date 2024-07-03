@@ -41,7 +41,7 @@ public class Main {
         listaSensor.add(sensor15);
         
         Relatorio relatorio= new Relatorio();
-        relatorio.criarRelatorio(listaSensor,"teste");
+        relatorio.criarRelatorio(listaSensor);
          
         //criar exemplo de chatbot
         //ChatGPTUtil chatGPTUtil = new ChatGPTUtil();
