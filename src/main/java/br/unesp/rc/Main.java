@@ -57,6 +57,5 @@ public class Main {
 
         String resultadoTraduzido = traduzir(linguagemTexto, "pt", resposta);
         System.out.println("\nTexto traduzido: " + resultadoTraduzido);
-
     }
 }
