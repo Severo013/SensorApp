@@ -15,30 +15,6 @@ public class SensorQualidadeAgua extends Sensor {
         this.indicadorTurbidez = turb;
     }
 
-    public double getIndicadorPH() {
-        return indicadorPH;
-    }
-
-    public void setIndicadorPH(double indicadorPH) {
-        this.indicadorPH = indicadorPH;
-    }
-
-    public double getIndicadorTurbidez() {
-        return indicadorTurbidez;
-    }
-
-    public void setIndicadorTurbidez(double indicadorTurbidez) {
-        this.indicadorTurbidez = indicadorTurbidez;
-    }
-
-    public double getIndicadorCondutividade() {
-        return indicadorCondutividade;
-    }
-
-    public void setIndicadorCondutividade(double indicadorCondutividade) {
-        this.indicadorCondutividade = indicadorCondutividade;
-    }
-
     @Override
     public String toString() {
         return  "Sensor - id: " + id +

@@ -15,30 +15,6 @@ public class SensorQualidadeAr extends Sensor {
         this.indicadorO3 = o3;
     }
 
-    public double getIndicadorCO2() {
-        return indicadorCO2;
-    }
-
-    public void setIndicadorCO2(double indicadorCO2) {
-        this.indicadorCO2 = indicadorCO2;
-    }
-
-    public double getIndicadorPM() {
-        return indicadorPM;
-    }
-
-    public void setIndicadorPM(double indicadorPM) {
-        this.indicadorPM = indicadorPM;
-    }
-
-    public double getIndicadorO3() {
-        return indicadorO3;
-    }
-
-    public void setIndicadorO3(double indicadorO3) {
-        this.indicadorO3 = indicadorO3;
-    }
-
     @Override
     public String toString() {
         return  "Sensor - id: " + id +
