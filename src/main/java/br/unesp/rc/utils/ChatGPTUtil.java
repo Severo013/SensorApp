@@ -1,6 +1,5 @@
 package br.unesp.rc.utils;
 
-import com.theokanning.openai.completion.CompletionRequest;
 import com.theokanning.openai.completion.chat.ChatCompletionRequest;
 import com.theokanning.openai.completion.chat.ChatMessage;
 import com.theokanning.openai.completion.chat.ChatMessageRole;
@@ -25,7 +24,9 @@ public class ChatGPTUtil implements IChatGPTUtil {
         service = new OpenAiService(Token);
     }
 
-    public void gerarResposta(String input) {
+    public String gerarResposta(String input) {
+
+        input = "Imagine que você é um assistente virtual da administração de uma cidade inteligente, dê uma resposta breve, " + input;
 
         final List<ChatMessage> messages = new ArrayList<>();
         final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), input);
@@ -36,16 +37,14 @@ public class ChatGPTUtil implements IChatGPTUtil {
                 .model(Model)
                 .messages(messages)
                 .n(1)
-                .maxTokens(50)
+                .maxTokens(500)
                 .logitBias(new HashMap<>())
                 .build();
 
-        String response = service.createChatCompletion(chatCompletionRequest)
+        return service.createChatCompletion(chatCompletionRequest)
                 .getChoices()
                 .getFirst()
                 .getMessage()
                 .getContent();
-
-        System.out.println(response);
     }
 }
